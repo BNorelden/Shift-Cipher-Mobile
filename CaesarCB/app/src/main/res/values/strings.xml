@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CaesarCB</string>
+    <string name="app_intro">Hello, A small application that i would like to think of as an empowerment to caesar Cipher. For more info click on the Details Button</string>
+    <string name="app_back">Back</string>
+    <string name="app_generate">Generate</string>
+    <string name="app_hint">Enter Your Text Here Then Click Generate</string>
+
+</resources>
