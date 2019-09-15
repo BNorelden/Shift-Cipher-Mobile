@@ -21,10 +21,8 @@ public class MobileCaeserCB  {
 	String t = DeserializeDemo.globalS;
 	static Date dwitht; //= DeserializeDemo.dandt
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-	
-	
-	//Date date1=new SimpleDateFormat("dd/MM/yyyy'T'HH:mm:ss").parse(t);
-	
+	static ArrayList<Integer> numbers = new ArrayList<Integer>();
+
 
 	public static StringBuffer encrypt(String text, int s) {
 		StringBuffer result = new StringBuffer();
@@ -46,7 +44,7 @@ public class MobileCaeserCB  {
 	
 	
 	public static Date dateCompare(Date  d1, Date d2) {
-		String t = DeserializeDemo.globalS;
+		//String t = DeserializeDemo.globalS;
 		 //e.date14;
 		 long l1 = d1.getTime();
 		 long l2 = d2.getTime();
@@ -63,10 +61,12 @@ public class MobileCaeserCB  {
 	 }
 
 	public static void CCB() {
-		
-		Random rand = new Random(); 
-    	
-    	ArrayList<Integer> numbers = new ArrayList<Integer>();   // much cleaner
+
+		// going to have to check date here, first save then compare and if state redo random else use same 1
+		// have to check mobile serialization first
+		// have to work on this RANDOM WITH CCB. TELL IT to check the checker, if its a different date generate, else use old ones
+
+    	   // much cleaner
     	Random randomGenerator = new Random();						// will have to auto run this everyday from here
     	while (numbers.size() < 4) {
 
@@ -74,19 +74,19 @@ public class MobileCaeserCB  {
     	    if (!numbers.contains(random)) {
     	        numbers.add(random);
     	    }
-    	}	System.out.println(numbers);								
+    	}	//System.out.println(numbers);
         
     	//System.out.print(numbers.get(0)+" "+ numbers.get(1)+"\n");
    
         Calendar cal = Calendar.getInstance();
-        cal.get(Calendar.HOUR); //cal.getTime() //12 hr format
+        //cal.get(Calendar.HOUR); //cal.getTime() //12 hr format
         
         int curr = cal.get(Calendar.HOUR_OF_DAY); //cal.get(Calendar.HOUR_OF_DAY) 24 hrs format ------------ Calendar.HOUR_OF_DAY 12 hrs format
-        System.out.println("curr is : "+ curr);
+        //System.out.println("curr is : "+ curr);
        
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'Time: ' HH:mm:ss z");
         Date date13 = new Date(System.currentTimeMillis());
-        System.out.println("Today's Date and Time: " + formatter.format(date13));
+        //System.out.println("Today's Date and Time: " + formatter.format(date13));
         
 /******************************************************CONDITION STATEMENT TO CHECK WHICH QUART WE CURRENTLY IN ****************************************/
         if(curr>=1 && curr<=6)

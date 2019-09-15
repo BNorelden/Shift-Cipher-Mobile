@@ -1,15 +1,20 @@
 package mainCCB;
 
+import android.content.Context;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-public class JavaDBtest {
+public class JavaSerialize {
 
    public static void main(String [] args) {
       DandT e = new DandT();
      // imma just replace employee and refactor
-      
+
+
+
       try {
+
          FileOutputStream fileOut =
          new FileOutputStream("/Users/Bilal/Desktop/test3.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);

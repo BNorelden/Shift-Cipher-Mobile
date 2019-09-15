@@ -1,17 +1,19 @@
 package mainCCB;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
+import static mainCCB.MobileCaeserCB.numbers;
 public class DandT implements java.io.Serializable {
 	   /**
 	 * 
 	 */
-	private static final long serialVersionUID = -5939917944208896972L;
-	   SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	static ArrayList<Integer> numbers = MobileCaeserCB.numbers;
+	public static final long serialVersionUID = -5939917944208896972L;
+	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	   
-	   Date date13 = new Date(System.currentTimeMillis());
-	   String date14 = formatter.format(date13);
+	public Date date13 = new Date(System.currentTimeMillis());
+	public String date14 = formatter.format(date13);
 	   
 
 	  
