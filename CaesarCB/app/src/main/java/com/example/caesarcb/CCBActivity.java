@@ -14,11 +14,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import mainCCB.DandT;
 import mainCCB.DeserializeDemo;
 
+import static mainCCB.DandT.numb;
 import static mainCCB.MobileCaeserCB.CCB;
 import static mainCCB.MobileCaeserCB.encrypt;
 import static mainCCB.MobileCaeserCB.s;
@@ -35,13 +37,13 @@ public class CCBActivity extends AppCompatActivity {
 
 
 
-    TextView tv, tvdate,tvtime,tvshift; // do not initialize here u newb
+    TextView tv, tvdate,tvtime,tvshift,tvshift2; // do not initialize here u newb
     Button bgenerate;
     EditText etext;
     String encrption;
     DandT it = null;
-    static boolean checker = false;
-
+    public static boolean checker = false;
+    public static ArrayList<Integer> numby = new ArrayList<Integer>();
     //SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'Time: 'HH:mm:ss z");
     SimpleDateFormat formattert= new SimpleDateFormat("HH:mm:ss z");
     SimpleDateFormat formatterd= new SimpleDateFormat("yyyy-MM-dd");
@@ -66,6 +68,7 @@ public class CCBActivity extends AppCompatActivity {
         tvdate.setText(formatterd.format(d));
 
         tvshift = findViewById(R.id.tvShift);
+        tvshift2 = findViewById(R.id.tvShift2);
         //tvshift.setText("Current Shift: "+s);
 
         etext = findViewById(R.id.etext);
@@ -75,7 +78,7 @@ public class CCBActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
         if(sdf.format(d).compareTo(sdf.format(it.date13))>0) {
-
+            checker = true;
             tv.setText("Date1 is after Date2"+ it.date13.toString()); // replace the date with a  new date
             serMobileOut();
         }
@@ -85,7 +88,7 @@ public class CCBActivity extends AppCompatActivity {
         else{
             tv.setText("Date1 is equal to Date2"+it.date13.toString());
         }
-
+        numby = it.numb;
 
 
         bgenerate = findViewById(R.id.bgen);
@@ -98,6 +101,8 @@ public class CCBActivity extends AppCompatActivity {
                         tvtime.setText(formattert.format(d));
                         tvdate.setText(formatterd.format(d));
                         tvshift.setText("Current Shift: "+s); // something is wrong here, numbers are wrong
+                        tvshift2.setText(it.numb.toString());// this isnt working for some reason
+
 
                         ss = etext.getText().toString();
 
@@ -147,7 +152,7 @@ public class CCBActivity extends AppCompatActivity {
         } catch (ClassNotFoundException c) {
             System.out.println("DandT class not found");
             c.printStackTrace();
-            return;
+
         }
 
 

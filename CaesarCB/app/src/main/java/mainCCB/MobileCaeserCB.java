@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.Serializable;
 
+import static com.example.caesarcb.CCBActivity.checker;
+import static com.example.caesarcb.CCBActivity.numby;
+import static mainCCB.DandT.numb;
+
 public class MobileCaeserCB  {
 
 	public static int s;
@@ -61,20 +65,28 @@ public class MobileCaeserCB  {
 	 }
 
 	public static void CCB() {
-
+	/*
+	* *******************************************************************************************
+	* WILL HAVE TO RENAME NUMBERS TO 2 DIFFERENT VARS 1 FROM DANDT and other for generator
+	*  */
 		// going to have to check date here, first save then compare and if state redo random else use same 1
 		// have to check mobile serialization first
 		// have to work on this RANDOM WITH CCB. TELL IT to check the checker, if its a different date generate, else use old ones
 
     	   // much cleaner
-    	Random randomGenerator = new Random();						// will have to auto run this everyday from here
-    	while (numbers.size() < 4) {
+    						// will have to auto run this everyday from here
 
-    	    int random = randomGenerator .nextInt(26); // from 0-25
-    	    if (!numbers.contains(random)) {
-    	        numbers.add(random);
-    	    }
-    	}	//System.out.println(numbers);
+		if(checker == true) {
+			Random randomGenerator = new Random();
+			while (numbers.size() < 4) {
+
+				int random = randomGenerator.nextInt(26); // from 0-25
+				if (!numbers.contains(random)) {
+					numbers.add(random);
+				}
+			}    //System.out.println(numbers);
+		checker = false;
+		}
         
     	//System.out.print(numbers.get(0)+" "+ numbers.get(1)+"\n");
    
@@ -91,7 +103,7 @@ public class MobileCaeserCB  {
 /******************************************************CONDITION STATEMENT TO CHECK WHICH QUART WE CURRENTLY IN ****************************************/
         if(curr>=1 && curr<=6)
  	    {
- 	        s = numbers.get(0);  //here i had local variables s, but i just created a main static one above to use it in all of them.
+ 	        s = numby.get(0);  //here i had local variables s, but i just created a main static one above to use it in all of them.
             encrypt(ss, s);
 // 	    	System.out.println("The 1st quarter");
 // 	    	System.out.println("Cipher Q1 with shift "+ s +": " + encrypt(ss, s));
@@ -99,7 +111,7 @@ public class MobileCaeserCB  {
  	    
         else if(curr>=7 && curr<=12)
  	    {
- 	        s = numbers.get(1);
+ 	        s = numby.get(1);
             encrypt(ss, s);
 //            System.out.println("The 2nd quarter");
 // 	   System.out.println("Cipher Q2 with shift "+ s +": " + encrypt(ss, s));
@@ -107,7 +119,7 @@ public class MobileCaeserCB  {
  	    
  	   else if(curr>=13 && curr<=18)
  	    {
- 	        s = numbers.get(2);
+ 	        s = numby.get(2);
             encrypt(ss, s);
 //            System.out.println("The 3rd quarter");
 // 	   System.out.println("Cipher Q3 with shift "+ s +": " + encrypt(ss, s));
@@ -115,7 +127,7 @@ public class MobileCaeserCB  {
  	    
  	  else if(curr>=19 && curr<=23 || curr == 0 )
  	    {
- 	        s = numbers.get(3);
+ 	        s = numby.get(3);
             encrypt(ss, s);
 //            System.out.println("The 4th quarter");
 // 	   System.out.println("Cipher Q4 with shift "+ s +": " + encrypt(ss, s));
