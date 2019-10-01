@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -37,20 +38,16 @@ public class CCBActivity extends AppCompatActivity {
     EditText etext;
     String encryption;
     static DandT it;
-    public static boolean checker = true;
     public static ArrayList<Integer> numby = new ArrayList<Integer>();
 
 
     SimpleDateFormat formattert= new SimpleDateFormat("HH:mm:ss z");
     SimpleDateFormat formatterd= new SimpleDateFormat("yyyy-MM-dd");
 
-
-    Date d = new Date(System.currentTimeMillis());
+    Date d = new Date(System.currentTimeMillis()); // stopped using to check Sys.curr alone if this was un-necessary
 
     public static int s;
     public static String ss = "";
-    static Date dwitht; //= DeserializeDemo.dandt
-    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     public static ArrayList<Integer> numbers = new ArrayList<Integer>();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -71,18 +68,23 @@ public class CCBActivity extends AppCompatActivity {
         tvshift2 = findViewById(R.id.tvShift2);
         etext = findViewById(R.id.etext);
 
+        serMobileIn();      //deserialize
 
-        /*
-        I WILL JUST REDO THE WHOLE LOGIC THING
-        FIRST CHECK IF SOMETHING WAS SERIALIZED, IF NOT CALL RANDOM NUMS
+        if (numbers.size() == 0 && it.statnum.size() == 0) {
+            randy(); //now i have to call randy within the DandT function with the serialization of serMobileOut() **************************************DO FIRST*******
+            serMobileOut(); // ser
+        }
 
-        for now the bool only works with true will commit just to be safe
+        tv.setText(it.statnum.toString());  //TESTCASE#1
+        //tv.setText(it.date13.toString()+" compared with "+d.toString()) //TESTCASE#2
+        //tv.setText(sdf.format(d)+" is being compared with "+sdf.format(it.date13)); //TESTCASE#3
+        if(sdf.format(System.currentTimeMillis()).compareTo(sdf.format(it.date13))>0) {
 
-        ONLY USING DandT and CCB ACTIVITY SO FAR
-
-         */
-
-
+            randy();
+            tv.setText("Date1 is after Date2 "+ it.statnum.toString()); // replace the date with a  new date
+            serMobileOut();
+            serMobileOut();
+        }
 
         bgenerate = findViewById(R.id.bgen);
         bgenerate.setOnClickListener(new View.OnClickListener() {
@@ -90,41 +92,36 @@ public class CCBActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.bgen:
-                        serMobileIn(); //deserial
 
-                        if(sdf.format(d).compareTo(sdf.format(it.date13))>0) {
-                            checker = true;
-                            tv.setText("Date1 is after Date2"+ it.date13.toString()); // replace the date with a  new date
+                        if(sdf.format(System.currentTimeMillis()).compareTo(sdf.format(it.date13))>0) {
+                            randy();
+                            tv.setText("Date1 is after Date2 "+ it.statnum.toString()); // replace the date with a  new date
                             serMobileOut();
+                            serMobileOut();
+
                         }else{
-                            tv.setText("Date1 is equal to Date2"+it.date13.toString());
-                            numbers = numby;
+                            tv.setText("Date1 is equal to Date2: "+it.statnum.toString());
                         }
 
-                        tvtime.setText(formattert.format(d));
-                        tvdate.setText(formatterd.format(d));
-                        tvshift.setText("Current Shift: "+s); // something is wrong here, numbers are wrong
-                        tvshift2.setText(numby.toString());// this isnt working for some reason
-
+                        tvtime.setText(formattert.format(System.currentTimeMillis()));
+                        tvdate.setText(formatterd.format(System.currentTimeMillis()));
+                        tvshift.setText("Current Shift: "+s);
+                        tvshift2.setText(it.statnum.toString());
 
                         ss = etext.getText().toString();
 
-                        CCB(); // RANDOM SHOULD BE CALLED ONCE A DAY NOT ON EVERY CLICK
+                        CCB();
 
                         encryption = ss;
                         tv.setText(encryption);
-
                         break;
-
                 }
-
             }
         });
     }
 
     public static StringBuffer encrypt(String text, int s) {
         StringBuffer result = new StringBuffer();
-
         for (int i = 0; i < text.length(); i++) {
             if (Character.isUpperCase(text.charAt(i))) {
                 char ch = (char) (((int) text.charAt(i) + s - 65) % 26 + 65); // 26 representing the alphabet and 65 is
@@ -141,12 +138,12 @@ public class CCBActivity extends AppCompatActivity {
 
     void serMobileOut(){ // serializing
         DandT e = new DandT();
-
+        e.statnum = numbers;
+        Log.d(TAG, "serMobileOut: curr values" + e.statnum.toString());
         try {
             FileOutputStream fos = this.openFileOutput("testSerMobile", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(e);
-
             os.close();
             fos.close();
         } catch (IOException i) {
@@ -158,10 +155,8 @@ public class CCBActivity extends AppCompatActivity {
         try{
         FileInputStream fis = this.openFileInput("testSerMobile");
         ObjectInputStream is = new ObjectInputStream(fis);
-        //e = (DandT) is.readObject();
         it = (DandT) is.readObject();
-        numby = (ArrayList) is.readObject();;
-
+        Log.d(TAG, "serMobileOut: curr values #2 " + it.statnum.toString());
         is.close();
         fis.close();
         } catch (IOException i){
@@ -174,20 +169,7 @@ public class CCBActivity extends AppCompatActivity {
 
     }
 
-
-    public static void CCB() {
-        /*
-         * *******************************************************************************************
-         * WILL HAVE TO RENAME NUMBERS TO 2 DIFFERENT VARS 1 FROM DANDT and other for generator
-         *  */
-        // going to have to check date here, first save then compare and if state redo random else use same 1
-        // have to check mobile serialization first
-        // have to work on this RANDOM WITH CCB. TELL IT to check the checker, if its a different date generate, else use old ones
-
-        // much cleaner
-        // will have to auto run this everyday from here
-
-        if(checker == true) {
+    public static void randy(){
             Random randomGenerator = new Random();
             while (numbers.size() < 4) {
 
@@ -195,70 +177,44 @@ public class CCBActivity extends AppCompatActivity {
                 if (!numbers.contains(random)) {
                     numbers.add(random);
                 }
-            }    //System.out.println(numbers);
-            checker = false;
-        }else{
-            numbers = numby;
+            }
         }
 
-
-
-//            Random randomGenerator = new Random();
-//            while (numbers.size() < 4) {
-//
-//                int random = randomGenerator.nextInt(26); // from 0-25
-//                if (!numbers.contains(random)) {
-//                    numbers.add(random);
-//                }
-//            }    //System.out.println(numbers);
+    public static void CCB() {
 
 
         Calendar cal = Calendar.getInstance();
-        //cal.get(Calendar.HOUR); //cal.getTime() //12 hr format
+
 
         int curr = cal.get(Calendar.HOUR_OF_DAY); //cal.get(Calendar.HOUR_OF_DAY) 24 hrs format ------------ Calendar.HOUR_OF_DAY 12 hrs format
-        //System.out.println("curr is : "+ curr);
 
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'Time: ' HH:mm:ss z");
-        Date date13 = new Date(System.currentTimeMillis());
-        //System.out.println("Today's Date and Time: " + formatter.format(date13));
+
+//        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'Time: ' HH:mm:ss z");
+//        Date date13 = new Date(System.currentTimeMillis());
+//        //System.out.println("Today's Date and Time: " + formatter.format(date13));
 
 /******************************************************CONDITION STATEMENT TO CHECK WHICH QUART WE CURRENTLY IN ****************************************/
         if(curr>=1 && curr<=6)
         {
-            //Index: 0, Size: 0 GODSSSSSSSSSSSSSSSSSSSSSS maybe try to save it again
-            s = numbers.get(0);  //here i had local variables s, but i just created a main static one above to use it in all of them.
+            s = it.statnum.get(0);
             encrypt(ss, s);
-// 	    	System.out.println("The 1st quarter");
-// 	    	System.out.println("Cipher Q1 with shift "+ s +": " + encrypt(ss, s));
         }
-
         else if(curr>=7 && curr<=12)
         {
-            s = numbers.get(1);
+            s = it.statnum.get(1);
             encrypt(ss, s);
-//            System.out.println("The 2nd quarter");
-// 	   System.out.println("Cipher Q2 with shift "+ s +": " + encrypt(ss, s));
         }
-
         else if(curr>=13 && curr<=18)
         {
-            s = numbers.get(2);
+            s = it.statnum.get(2);
             encrypt(ss, s);
-//            System.out.println("The 3rd quarter");
-// 	   System.out.println("Cipher Q3 with shift "+ s +": " + encrypt(ss, s));
-        }
 
+        }
         else if(curr>=19 && curr<=23 || curr == 0 )
         {
-            s = numbers.get(3);
+            s = it.statnum.get(3);
             encrypt(ss, s);
-//            System.out.println("The 4th quarter");
-// 	   System.out.println("Cipher Q4 with shift "+ s +": " + encrypt(ss, s));
+
         }
-
     }
-
-
 }
-
