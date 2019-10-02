@@ -1,4 +1,4 @@
-package com.example.caesarcb;
+package com.example.SCMobile;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.caesarcb.R;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,7 +40,6 @@ public class CCBActivity extends AppCompatActivity {
     EditText etext;
     String encryption;
     static DandT it;
-    public static ArrayList<Integer> numby = new ArrayList<Integer>();
 
 
     SimpleDateFormat formattert= new SimpleDateFormat("HH:mm:ss z");
@@ -67,6 +68,13 @@ public class CCBActivity extends AppCompatActivity {
         tvshift = findViewById(R.id.tvShift);
         tvshift2 = findViewById(R.id.tvShift2);
         etext = findViewById(R.id.etext);
+
+        randy(); //now i have to call randy within the DandT function with the serialization of serMobileOut() **************************************DO FIRST*******
+            serMobileOut(); // ser
+//        if(it.statnum == null && numbers == null){
+//            randy(); //now i have to call randy within the DandT function with the serialization of serMobileOut() **************************************DO FIRST*******
+//            serMobileOut(); // ser
+//        } Attempt to read from field 'java.util.ArrayList mainCCB.DandT.statnum' on a null object reference
 
         serMobileIn();      //deserialize
 

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.SCMobile.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,10 +18,10 @@
         </activity>
 
 
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name="com.example.SCMobile.DetailsActivity"></activity>
 
 
-        <activity android:name=".CCBActivity"></activity>
+        <activity android:name="com.example.SCMobile.CCBActivity"></activity>
     </application>
 
 </manifest>

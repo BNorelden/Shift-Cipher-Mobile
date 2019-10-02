@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context="com.example.SCMobile.MainActivity"
     android:background="@android:color/black"
 
     >
@@ -53,7 +53,7 @@
         android:id="@+id/bgen"
         android:layout_width="148dp"
         android:layout_height="57dp"
-        android:text="Caesar Cipher B"
+        android:text="Shift Cipher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
