@@ -69,9 +69,9 @@ public class CCBActivity extends AppCompatActivity {
         tvshift2 = findViewById(R.id.tvShift2);
         etext = findViewById(R.id.etext);
 
-        randy(); //now i have to call randy within the DandT function with the serialization of serMobileOut() **************************************DO FIRST*******
-            serMobileOut(); // ser
-//        if(it.statnum == null && numbers == null){
+ //       randy(); //now i have to call randy within the DandT function with the serialization of serMobileOut() **************************************DO FIRST*******
+        //            serMobileOut(); // ser
+//        if(it.statnum == null && numbers == null){ // need to figure this out for new devices maybe put it in deserialize else statement
 //            randy(); //now i have to call randy within the DandT function with the serialization of serMobileOut() **************************************DO FIRST*******
 //            serMobileOut(); // ser
 //        } Attempt to read from field 'java.util.ArrayList mainCCB.DandT.statnum' on a null object reference
@@ -169,9 +169,13 @@ public class CCBActivity extends AppCompatActivity {
         fis.close();
         } catch (IOException i){
             i.printStackTrace();
+            randy();
+            serMobileOut();
         } catch (ClassNotFoundException c) {
             System.out.println("DandT class not found");
             c.printStackTrace();
+            randy();
+            serMobileOut();
 
         }
 

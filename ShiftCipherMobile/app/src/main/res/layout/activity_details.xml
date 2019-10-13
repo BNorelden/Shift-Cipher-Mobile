@@ -4,39 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.SCMobile.MainActivity"
     android:background="@android:color/black"
 
-    >
+    tools:context="com.example.SCMobile.MainActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="417dp"
-        android:layout_height="310dp"
+    <TextView
+        android:id="@+id/tView2"
+        android:layout_width="385dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="68dp"
+        android:background="@color/grayish"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/app_moreDetails"
+        android:textColor="#39FF14"
+        android:textSize="24sp"
+
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011">
+        app:layout_constraintVertical_bias="0.0" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/scode"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginBottom="336dp"
+        android:text="@string/app_sourceCode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scode2"
+        app:layout_constraintHorizontal_bias="0.626"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tView2" />
 
-            <TextView
-                android:id="@+id/tView2"
-                android:layout_width="382dp"
-                android:layout_height="233dp"
-                android:text="@string/app_intro"
-                android:textColor="#39FF14"
-                android:textSize="18sp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.457"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/scode2"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="336dp"
+        android:text="@string/app_cpyLink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tView2" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">SCMobile</string>
-    <string name="app_intro">Hello, A small application that i would like to think of as an empowerment to caesar Cipher. For more info click on the Details Button</string>
+    <string name="app_intro">Hello, A small application that i would like to think of as an empowerment to caesar Cipher.
+        For more info click on the Details Button</string>
+    <string name="app_moreDetails">The source code below one opens the app, other copies to clipboard \n can also find the
+        referneces on github along with the source</string>
     <string name="app_back">Back</string>
     <string name="app_generate">Generate</string>
     <string name="app_hint">Enter Your Text Here Then Click Generate</string>
-
+    <string name="app_sourceCode">Source Code</string>
+    <string name="app_cpyLink">Copy Link</string>
 </resources>
